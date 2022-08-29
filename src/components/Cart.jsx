@@ -1,10 +1,19 @@
 import React, { useState } from "react";
 import CartData from "./CartData";
 import Button from "@mui/material/Button";
+import { useDispatch } from "react-redux";
+import { ADD } from "../redux/actions/action";
 
 const Cart = () => {
   const [data, setData] = useState(CartData);
-  console.log(data);
+  // console.log(data);
+
+  const dispatch = useDispatch();
+
+  const send = (e) => {
+    console.log(e);
+    dispatch(ADD(e));
+  };
 
   return (
     <>
@@ -24,7 +33,14 @@ const Cart = () => {
                       <h5 className="card-title">{element.rname}</h5>
                       <p className="card-text">Price : ₹ {element.price}</p>
                       <div className="d-flex justify-content-center">
-                        <Button variant="outlined">Add to Cart</Button>
+                        <Button
+                          variant="outlined"
+                          onClick={() => {
+                            send(element);
+                          }}
+                        >
+                          Add to Cart
+                        </Button>
                       </div>
                     </div>
                   </div>
